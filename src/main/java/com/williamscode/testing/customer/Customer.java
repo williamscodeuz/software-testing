@@ -1,5 +1,7 @@
 package com.williamscode.testing.customer;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,15 +15,18 @@ import java.util.UUID;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(value = {"id"}, allowGetters = true)
 public class Customer {
 
     @Id
     private UUID id;
 
     @NotBlank
+    @Column(nullable = false)
     private String name;
 
     @NotBlank
+    @Column(nullable = false, unique = true)
     private String phoneNumber;
 
 }
