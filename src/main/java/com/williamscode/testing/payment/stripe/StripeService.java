@@ -8,11 +8,16 @@ import com.williamscode.testing.payment.CardPaymentCharge;
 import com.williamscode.testing.payment.CardPaymentCharger;
 import com.williamscode.testing.payment.Currency;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
 @Service
+@ConditionalOnProperty(
+        value = "stripe.enabled",
+        havingValue = "true"
+)
 public class StripeService implements CardPaymentCharger {
 
     private final StripeApi stripeApi;
